@@ -9,6 +9,10 @@ public class WidgetCreation {
         Button button=new Button(text);
         return button;
     }
+    public static ButtonID CreateButton(String text,int id){
+        ButtonID btn=new ButtonID(text,id);
+        return btn;
+    }
     public static Rectangle CreateRec(double coordX, double coordY, double width, double height){
         Rectangle rect=new Rectangle();
         rect.setX(coordX);
@@ -20,4 +24,5 @@ public class WidgetCreation {
         rect.setArcWidth(40);
         return rect;
     }
+
 }
