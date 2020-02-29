@@ -21,6 +21,7 @@ public class VentanaPrincipal extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
       final AnchorPane FirstLevelAnchorPanel= LayoutCreation.Anchor(800.0,600.0);
        Rectangle rectSecondLevel= WidgetCreation.CreateRec(10.0,10.0,300.0,550.0);
        final ScrollPane SecondLevelScrollPane= LayoutCreation.scroll(400.0,500.0);
@@ -34,9 +35,7 @@ public class VentanaPrincipal extends Application {
         btn.setOnAction(e->
                 ChatAcumulator.Creator(SecondLevelScrollPane,FirstLevelAnchorPanel)
         );
-        btn1.setOnAction(e->
-                ControlEnvio.Enviar(TextInput.getText())
-                );
+       // btn1.setOnAction(e->);
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,SecondLevelScrollPane,20.0,0.0,0.0,350.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,btn,0.0,10.0,0,20.0);
