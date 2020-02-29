@@ -37,7 +37,7 @@ public class VentanaPrincipal extends Application {
         TextInput.setText("Escriba su mensaje aqui ");
         ChatAcumulator.setChatAcumulator(SecondLevelScrollPane,FirstLevelAnchorPanel);
         btn.setOnAction(e->
-            ChatAcumulator.Creator(Enlace.PuertoDisponible(mitelefono))
+            ChatAcumulator.Creator(40000)
         );
        // btn1.setOnAction(e->);
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);
