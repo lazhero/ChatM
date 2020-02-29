@@ -11,6 +11,13 @@ public class LayoutCreation {
         return AnchorP;
 
     }
+    public static AnchorPaneID AnchorID(double width,double heigth){
+        AnchorPaneID AnchorP =new AnchorPaneID();
+        AnchorP.setPrefHeight(heigth);
+        AnchorP.setPrefWidth(width);
+        return AnchorP;
+
+    }
     public static ScrollPane scroll(double width,double heigth){
         ScrollPane scrolls=new ScrollPane();
         scrolls.setPrefViewportHeight(heigth);

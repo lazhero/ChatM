@@ -24,6 +24,7 @@ public class VentanaPrincipal extends Application {
     public void start(Stage primaryStage) {
         EnlaceServidores Server =new EnlaceServidores();
         Server.ConectarRecepVariable();
+        int telefono=Server.getPort();
       final AnchorPane FirstLevelAnchorPanel= LayoutCreation.Anchor(800.0,600.0);
        Rectangle rectSecondLevel= WidgetCreation.CreateRec(10.0,10.0,300.0,550.0);
        final ScrollPane SecondLevelScrollPane= LayoutCreation.scroll(400.0,500.0);
@@ -35,7 +36,7 @@ public class VentanaPrincipal extends Application {
         TextInput.setPrefHeight(30.0);
         TextInput.setText("Escriba su mensaje aqui ");
         btn.setOnAction(e->
-                ChatAcumulator.Creator(SecondLevelScrollPane,FirstLevelAnchorPanel)
+
         );
        // btn1.setOnAction(e->);
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);
