@@ -14,7 +14,7 @@ public class ChatAcumulator {
     private static ScrollPane scroll;
     private static AnchorPane pane;
     private static int NumChats= 0;//Guarda la cantidad de chats hasta el momento
-    private static ArrayList<AnchorPane> Chats=new ArrayList<AnchorPane>();//Guarda los anchorpanel con cada chat
+    private static ArrayList<AnchorPaneID> Chats=new ArrayList<AnchorPaneID>();//Guarda los anchorpanel con cada chat
     private static ArrayList<Integer> ExitPorts=new ArrayList<Integer>();//Guarda los puertos de salida de cada chat
     public static void setChatAcumulator(ScrollPane scroll,AnchorPane anchor) {
             ChatAcumulator.scroll=scroll;
@@ -37,6 +37,13 @@ public class ChatAcumulator {
     private static void ChatToScroll(int indice){
         scroll.setContent(Chats.get(indice));
         ScreenChat=indice;
+    }
+    public static void AddMessage(String texto){
+        Label label=new Label(texto);
+        AnchorPaneID anchor=Chats.get(ScreenChat);
+        int posicion=anchor.getNumeroitems()+1;
+        anchor.RaiseItemNumbers();
+        LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
     }
 
 }

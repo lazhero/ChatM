@@ -39,7 +39,9 @@ public class VentanaPrincipal extends Application {
         btn.setOnAction(e->
             ChatAcumulator.Creator(40000)
         );
-       // btn1.setOnAction(e->);
+       btn1.setOnAction(e->
+               ChatAcumulator.AddMessage(TextInput.getText())
+               );
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,SecondLevelScrollPane,20.0,0.0,0.0,350.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,btn,0.0,10.0,0,20.0);
