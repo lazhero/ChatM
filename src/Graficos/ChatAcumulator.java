@@ -1,5 +1,6 @@
 package Graficos;
 
+import Conexiones.ClientsBookShelf;
 import Conexiones.Enlace;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,9 +22,12 @@ public class ChatAcumulator {
             ChatAcumulator.scroll=scroll;
             ChatAcumulator.pane=anchor;
     }
-    public static void Creator(int puerto){
+    public static void Creator(){
         if(ChatAcumulator.NumChats<=7) {
-            ExitPorts.add(puerto);
+            Enlace enlace=new Enlace();
+            enlace.ConectarEnviarVariable();
+            int puerto=enlace.getPort();
+            ClientsBookShelf.add(enlace);
             AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
             Chats.add(anchor);
             String NumeroChat = Integer.toString(puerto);
@@ -45,9 +49,8 @@ public class ChatAcumulator {
         int posicion=anchor.getNumeroitems()+1;
         anchor.RaiseItemNumbers();
         LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
-        //Enlace socket=new Enlace(ExitPorts.get(ScreenChat));
-        //socket.ConectarEnviarFijo();
-        //socket.EnviarMensaje(texto);
+        ClientsBookShelf.Enviar(ScreenChat,texto);
+
     }
 
 }

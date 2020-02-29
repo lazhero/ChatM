@@ -37,7 +37,7 @@ public class VentanaPrincipal extends Application {
         TextInput.setText("Escriba su mensaje aqui ");
         ChatAcumulator.setChatAcumulator(SecondLevelScrollPane,FirstLevelAnchorPanel);
         btn.setOnAction(e->
-            ChatAcumulator.Creator(40000)
+            ChatAcumulator.Creator()
         );
        btn1.setOnAction(e->
                ChatAcumulator.AddMessage(TextInput.getText())
