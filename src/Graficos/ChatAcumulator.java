@@ -1,5 +1,6 @@
 package Graficos;
 
+import Conexiones.Enlace;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -44,6 +45,9 @@ public class ChatAcumulator {
         int posicion=anchor.getNumeroitems()+1;
         anchor.RaiseItemNumbers();
         LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
+        //Enlace socket=new Enlace(ExitPorts.get(ScreenChat));
+        //socket.ConectarEnviarFijo();
+        //socket.EnviarMensaje(texto);
     }
 
 }
