@@ -11,32 +11,38 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 public class ChatAcumulator {
-    private int Chatid;
+    private static int selfport;
     private static int ScreenChat;
     private static ScrollPane scroll;
     private static AnchorPane pane;
     private static int NumChats= 0;//Guarda la cantidad de chats hasta el momento
     private static ArrayList<AnchorPaneID> Chats=new ArrayList<AnchorPaneID>();//Guarda los anchorpanel con cada chat
     private static ArrayList<Integer> ExitPorts=new ArrayList<Integer>();//Guarda los puertos de salida de cada chat
-    public static void setChatAcumulator(ScrollPane scroll,AnchorPane anchor) {
+    public static void setChatAcumulator(ScrollPane scroll,AnchorPane anchor,int puertoServer) {
             ChatAcumulator.scroll=scroll;
             ChatAcumulator.pane=anchor;
+            selfport=puertoServer;
     }
     public static void Creator(){
         if(ChatAcumulator.NumChats<=7) {
-            Enlace enlace=new Enlace();
-            enlace.ConectarEnviarVariable();
-            int puerto=enlace.getPort();
-            ClientsBookShelf.add(enlace);
-            AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
-            Chats.add(anchor);
-            String NumeroChat = Integer.toString(puerto);
-            ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
-            btn.setOnAction(e ->
-                    ChatAcumulator.ChatToScroll(btn.getID())
-            );
-            LayoutNewContent.Add(pane, btn, 50.0 *( btn.getID()+1), 0, 0, 25.0);
-            NumChats++;
+            try {
+                Enlace enlace = new Enlace();
+                enlace.ConectarEnviarVariable(40000, selfport);
+                int puerto = enlace.getPort();
+                ClientsBookShelf.add(enlace);
+                AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
+                Chats.add(anchor);
+                String NumeroChat = Integer.toString(puerto);
+                ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
+                btn.setOnAction(e ->
+                        ChatAcumulator.ChatToScroll(btn.getID())
+                );
+                LayoutNewContent.Add(pane, btn, 50.0 * (btn.getID() + 1), 0, 0, 25.0);
+                NumChats++;
+            }
+            catch (Exception e){
+                System.out.println("No hay otros usuarios disponibles");
+            }
         }
     }
     public static void Creator(int Puerto){
@@ -70,6 +76,7 @@ public class ChatAcumulator {
 
     }
     public static void AddMessage(String texto,int Listpos){
+        System.out.println("Llegue al out mensaje");
         Label label=new Label(texto);
         AnchorPaneID anchor=Chats.get(Listpos);
         int posicion=anchor.getNumeroitems()+1;
