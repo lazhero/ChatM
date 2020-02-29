@@ -1,6 +1,6 @@
 package Graficos;
 
-import Conexiones.ControlEnvio;
+import Conexiones.Enlace;
 import Conexiones.EnlaceServidores;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -24,7 +24,7 @@ public class VentanaPrincipal extends Application {
     public void start(Stage primaryStage) {
         EnlaceServidores Server =new EnlaceServidores();
         Server.ConectarRecepVariable();
-        int telefono=Server.getPort();
+        int mitelefono=Server.getPort();
       final AnchorPane FirstLevelAnchorPanel= LayoutCreation.Anchor(800.0,600.0);
        Rectangle rectSecondLevel= WidgetCreation.CreateRec(10.0,10.0,300.0,550.0);
        final ScrollPane SecondLevelScrollPane= LayoutCreation.scroll(400.0,500.0);
@@ -35,8 +35,9 @@ public class VentanaPrincipal extends Application {
         TextInput.setPrefWidth(385.0);
         TextInput.setPrefHeight(30.0);
         TextInput.setText("Escriba su mensaje aqui ");
+        ChatAcumulator.setChatAcumulator(SecondLevelScrollPane,FirstLevelAnchorPanel);
         btn.setOnAction(e->
-
+            ChatAcumulator.Creator(Enlace.PuertoDisponible(mitelefono))
         );
        // btn1.setOnAction(e->);
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);

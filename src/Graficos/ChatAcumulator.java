@@ -21,16 +21,17 @@ public class ChatAcumulator {
             ChatAcumulator.pane=anchor;
     }
     public static void Creator(int puerto){
-        AnchorPaneID anchor=LayoutCreation.AnchorID(400,100000.0);
-        Chats.add(anchor);
-        String NumeroChat=Integer.toString(NumChats);
-        ButtonID btn=new ButtonID("Chat"+NumeroChat,NumChats);
-       btn.setOnAction(e->
-               ChatAcumulator.ChatToScroll(btn.getID())
-               );
-
-       NumChats++;
-
+        if(ChatAcumulator.NumChats<=7) {
+            AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
+            Chats.add(anchor);
+            String NumeroChat = Integer.toString(NumChats+1);
+            ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
+            btn.setOnAction(e ->
+                    ChatAcumulator.ChatToScroll(btn.getID())
+            );
+            LayoutNewContent.Add(pane, btn, 50.0 *( btn.getID()+1), 0, 0, 25.0);
+            NumChats++;
+        }
     }
     private static void ChatToScroll(int indice){
         scroll.setContent(Chats.get(indice));

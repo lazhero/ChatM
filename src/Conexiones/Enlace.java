@@ -89,5 +89,25 @@ public class Enlace {
     public int getPort(){
         return this.port;
     }
+    public static int PuertoDisponible(int PuertoOcupado){
+         int port=40000;
+        Socket Receptor=null;
+        boolean flag=true;
+        while(port<40100 && flag) {
+            try {
+                if (port!=PuertoOcupado) {
+                    Receptor = new Socket("127.0.0.1", port);
+                    System.out.println("Puerto encontrado");
+                    flag = false;
+                }
+            } catch (IOException excep) {
+                port++;
+                Receptor=null;
+
+            }
+        }
+        Receptor=null;
+        return port;
+    }
 
 }
