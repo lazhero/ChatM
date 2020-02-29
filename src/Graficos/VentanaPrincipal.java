@@ -25,6 +25,7 @@ public class VentanaPrincipal extends Application {
         EnlaceServidores Server =new EnlaceServidores();
         Server.ConectarRecepVariable();
         int mitelefono=Server.getPort();
+        System.out.println(mitelefono);
       final AnchorPane FirstLevelAnchorPanel= LayoutCreation.Anchor(800.0,600.0);
        Rectangle rectSecondLevel= WidgetCreation.CreateRec(10.0,10.0,300.0,550.0);
        final ScrollPane SecondLevelScrollPane= LayoutCreation.scroll(400.0,500.0);

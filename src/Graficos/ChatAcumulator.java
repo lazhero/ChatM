@@ -39,6 +39,23 @@ public class ChatAcumulator {
             NumChats++;
         }
     }
+    public static void Creator(int Puerto){
+        if(ChatAcumulator.NumChats<=7) {
+            Enlace enlace=new Enlace(Puerto);
+            enlace.ConectarEnviarFijo();
+            int puerto=enlace.getPort();
+            ClientsBookShelf.add(enlace);
+            AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
+            Chats.add(anchor);
+            String NumeroChat = Integer.toString(puerto);
+            ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
+            btn.setOnAction(e ->
+                    ChatAcumulator.ChatToScroll(btn.getID())
+            );
+            LayoutNewContent.Add(pane, btn, 50.0 *( btn.getID()+1), 0, 0, 25.0);
+            NumChats++;
+        }
+    }
     private static void ChatToScroll(int indice){
         scroll.setContent(Chats.get(indice));
         ScreenChat=indice;
@@ -50,6 +67,15 @@ public class ChatAcumulator {
         anchor.RaiseItemNumbers();
         LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
         ClientsBookShelf.Enviar(ScreenChat,texto);
+
+    }
+    public static void AddMessage(String texto,int Listpos){
+        Label label=new Label(texto);
+        AnchorPaneID anchor=Chats.get(Listpos);
+        int posicion=anchor.getNumeroitems()+1;
+        anchor.RaiseItemNumbers();
+        LayoutNewContent.Add(anchor,label,posicion*30,0,0,30.0);
+
 
     }
 

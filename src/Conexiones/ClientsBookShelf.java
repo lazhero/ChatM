@@ -18,5 +18,8 @@ public class ClientsBookShelf {
     public static int getPortNumber(int position){
         return ListaPuertos.get(position);
     }
+    public static ArrayList<Integer> ArrayReturn(){
+        return ListaPuertos;
+    }
 
 }
