@@ -9,12 +9,10 @@ public class Enlace {
     private  String ip;
     private Socket client;
     private boolean ConectadoS=false;
-<<<<<<< HEAD
+
     private boolean Enviando=true;
     private boolean MensajePendiente=true;
     private String MensajeaEnviar;
-=======
->>>>>>> parent of 2a486ac... #2
     public Enlace(int port, String ip){
         this.port=port;
         this.ip=ip;
@@ -104,18 +102,13 @@ public class Enlace {
     }
     public void EnviarMensaje(String Mensaje){
         try {
-<<<<<<< HEAD
-            OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
-            Escritura.write(Integer.toString(this.port)+"~"+Mensaje + "\n");
-            Escritura.flush();
-            this.client.close();
-=======
+
             //this.ConectarEnviarFijo();
             OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
             Escritura.write(Mensaje + "\n");
             Escritura.flush();
            this.client.close();
->>>>>>> parent of 2a486ac... #2
+
         }
         catch(IOException excep){
             System.out.print(excep.getMessage());

@@ -1,12 +1,11 @@
 package Conexiones;
 
-<<<<<<< HEAD
+
 import Hilos.HiloCliente;
 import jdk.net.Sockets;
 
 import java.net.Socket;
-=======
->>>>>>> parent of 2a486ac... #2
+
 import java.util.ArrayList;
 
 public class ClientsBookShelf {
@@ -15,14 +14,9 @@ public class ClientsBookShelf {
     public static void add(Enlace enlace){
         ListaSockets.add(enlace);
         ListaPuertos.add(enlace.getPort());
-<<<<<<< HEAD
         enlace.setMensajePendiente(false);
         HiloCliente hilo =new HiloCliente(enlace);
         hilo.start();
-
-
-=======
->>>>>>> parent of 2a486ac... #2
        // enlace.close();
 
     }
