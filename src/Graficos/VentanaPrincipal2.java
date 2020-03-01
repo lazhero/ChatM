@@ -24,7 +24,6 @@ public class VentanaPrincipal2 extends Application {
     public void start(Stage primaryStage) {
         EnlaceServidores Server =new EnlaceServidores();
         Server.ConectarRecepVariable();
-        //Server.setLectorsetEntrada();
         int mitelefono=Server.getPort();
         System.out.println(mitelefono);
         HiloServer hilo=new HiloServer(Server);
