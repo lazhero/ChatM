@@ -98,13 +98,14 @@ public class Enlace {
     }
     public void EnviarMensaje(String Mensaje){
         try {
+            //this.ConectarEnviarFijo();
             OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
             Escritura.write(Mensaje + "\n");
             Escritura.flush();
-            this.client.close();
+           this.client.close();
         }
         catch(IOException excep){
-            System.out.print("Error");
+            System.out.println(excep.getMessage());
         }
     }
     public int getPort(){
@@ -129,6 +130,14 @@ public class Enlace {
         }
         Receptor=null;
         return port;
+    }
+    public void close(){
+        try {
+            this.client.close();
+        }
+        catch (Exception e){
+
+        }
     }
 
 }

@@ -6,7 +6,7 @@ public class Pruebas1 {
         Lectura.ConectarRecepVariable();
         System.out.println("El puerto es "+Lectura.getPort());
         String[] Mensaje=Lectura.RecibirMensaje();
-        System.out.print(Mensaje[0]+ "segundo "+Mensaje[1]);
+        System.out.println(Mensaje[0]);
     }
 
 }

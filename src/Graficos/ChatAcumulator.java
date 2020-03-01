@@ -71,11 +71,13 @@ public class ChatAcumulator {
         AnchorPaneID anchor=Chats.get(ScreenChat);
         int posicion=anchor.getNumeroitems()+1;
         anchor.RaiseItemNumbers();
+        String Mensaje=Integer.toString(selfport)+"~"+texto;
         LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
-        ClientsBookShelf.Enviar(ScreenChat,texto);
+        ClientsBookShelf.Enviar(ScreenChat,Mensaje);
 
     }
     public static void AddMessage(String texto,int Listpos){
+        String textopuerto=Integer.toString(selfport);
         System.out.println("Llegue al out mensaje");
         Label label=new Label(texto);
         AnchorPaneID anchor=Chats.get(Listpos);

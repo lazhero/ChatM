@@ -30,6 +30,21 @@ public class HiloServer extends Thread{
 
                 System.out.println("El puerto ya existia");
             }
+            else{
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            System.out.println("Estoy en la creacion");
+                            ChatAcumulator.Creator(Puerto);
+                            ChatAcumulator.AddMessage(Recibido[1], ClientsBookShelf.getlen() - 1);
+                        }
+                        catch (Exception e){
+                            System.out.println("Muchachones, exploto");
+                        }
+                    }
+                });
+            }
         }
 
     }
