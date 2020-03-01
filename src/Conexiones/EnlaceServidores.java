@@ -10,8 +10,11 @@ import java.net.Socket;
 public class EnlaceServidores {
     private  int port;
     private  String ip;
+    private boolean recibiendo=true;
     private boolean ConectadoS=false;
     private ServerSocket Server;
+    private String[] Texto;
+    private Socket cliente;
     public EnlaceServidores(int port, String ip){
         this.port=port;
         this.ip=ip;
@@ -62,8 +65,8 @@ public class EnlaceServidores {
         boolean Recibiendo=true;
         try {
             while (Recibiendo) {
-                Socket Entrada = this.Server.accept();
-                BufferedReader Lector = new BufferedReader(new InputStreamReader(Entrada.getInputStream()));
+                this.cliente = this.Server.accept();
+                BufferedReader Lector = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));
                 Texto = Lector.readLine();
                 if(RevisionFormato.Format(Texto,"~")){
                     retorno=Texto.split("~");
@@ -75,12 +78,22 @@ public class EnlaceServidores {
 
         }
         catch(IOException Exp){
-            System.out.print("Matenme");
+            System.out.print(Exp.getMessage());
         }
         return retorno;
 
     }
+
+
+    public String[] getTexto() {
+        return Texto;
+    }
+
     public int getPort(){
         return this.port;
+    }
+
+    public ServerSocket getServer() {
+        return Server;
     }
 }

@@ -7,6 +7,7 @@ public class HiloCliente extends Thread {
     public HiloCliente(Enlace enlace){
         this.enlace=enlace;
     }
+    @Override
     public void run(){
         enlace.EnviarMensaje1();    }
 }

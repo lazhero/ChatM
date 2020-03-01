@@ -13,6 +13,7 @@ public class HiloServer extends Thread{
         this.Server=Server;
     }
     public void run(){
+        String[] Anterior=null;
         while(true){
             System.out.println("Llegue al bucle");
             String[] Recibido=this.Server.RecibirMensaje();//Retorna un array donde [0]=Numero de puerto que ocupa como servidor el emisor del texto y [1]=String Mensaje

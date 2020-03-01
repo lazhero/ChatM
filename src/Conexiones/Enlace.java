@@ -12,7 +12,7 @@ public class Enlace {
 
     private boolean Enviando=true;
     private boolean MensajePendiente=true;
-    private String MensajeaEnviar;
+    private String MensajeaEnviar="";
     public Enlace(int port, String ip){
         this.port=port;
         this.ip=ip;
@@ -101,9 +101,18 @@ public class Enlace {
         this.client= Receptor;
     }
     public void EnviarMensaje(String Mensaje){
+        if(this.client==null || this.client.isClosed()){
+            try {
+                this.client = new Socket(this.ip, this.port);
+                this.ConectarEnviarFijo();
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
         try {
 
-            //this.ConectarEnviarFijo();
+
             OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
             Escritura.write(Mensaje + "\n");
             Escritura.flush();
@@ -117,11 +126,22 @@ public class Enlace {
     public void EnviarMensaje1(){
 
         while(this.Enviando) {
+            OutputStreamWriter Escritura=null;
+            try{
+                Escritura = new OutputStreamWriter(this.client.getOutputStream());
+            }
+            catch (Exception e){
+
+                this.Enviando=false;
+                this.MensajePendiente=false;
+                //Escritura=null;
+            }
             if(this.MensajePendiente) {
+                System.out.println("Entre al bloque de enviar");
 
                 try {
                     //this.ConectarEnviarFijo();
-                    OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
+                    //OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
                     Escritura.write(this.MensajeaEnviar + "\n");
                     Escritura.flush();
                     //this.client.close();
@@ -129,6 +149,9 @@ public class Enlace {
                     System.out.println(excep.getMessage());
                 }
                 this.MensajePendiente=false;
+            }
+            else{
+                this.Enviando=true;
             }
         }
     }

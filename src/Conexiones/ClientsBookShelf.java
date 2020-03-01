@@ -15,9 +15,6 @@ public class ClientsBookShelf {
         ListaSockets.add(enlace);
         ListaPuertos.add(enlace.getPort());
         enlace.setMensajePendiente(false);
-        HiloCliente hilo =new HiloCliente(enlace);
-        hilo.start();
-       // enlace.close();
 
     }
     public static Enlace getEnlace(int posicion){
@@ -25,16 +22,8 @@ public class ClientsBookShelf {
     }
     public static void Enviar(int posicion,String Mensaje){
 
-        //ListaSockets.get(posicion).ConectarEnviarFijo();
-        //ListaSockets.get(posicion).EnviarMensaje(Mensaje);
-       // ListaSockets.get(posicion).close();
-        if((Mensaje.split("~")[1]).equalsIgnoreCase("Eso es todo")){
-            ListaSockets.get(posicion).setEnviando(false);
-        }
-        else {
-            ListaSockets.get(posicion).setMensajeaEnviar(Mensaje);
-            ListaSockets.get(posicion).setMensajePendiente(true);
-        }
+        ListaSockets.get(posicion).EnviarMensaje(Mensaje);
+
 
     }
     public static int getPortNumber(int position){
