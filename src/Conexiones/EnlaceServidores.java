@@ -65,7 +65,6 @@ public class EnlaceServidores {
                 Socket Entrada = this.Server.accept();
                 BufferedReader Lector = new BufferedReader(new InputStreamReader(Entrada.getInputStream()));
                 Texto = Lector.readLine();
-                System.out.println(Texto);
                 if(RevisionFormato.Format(Texto,"~")){
                     retorno=Texto.split("~");
                     Recibiendo=false;

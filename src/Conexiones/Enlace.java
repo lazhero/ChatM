@@ -1,7 +1,6 @@
 package Conexiones;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
@@ -10,14 +9,16 @@ public class Enlace {
     private  String ip;
     private Socket client;
     private boolean ConectadoS=false;
-    private OutputStreamWriter Escritura;
+    private boolean Enviando=true;
+    private boolean MensajePendiente=true;
+    private String MensajeaEnviar;
     public Enlace(int port, String ip){
         this.port=port;
         this.ip=ip;
     }
     public Enlace(){
-      this.port=40000;
-      this.ip="127.0.0.1";
+        this.port=40000;
+        this.ip="127.0.0.1";
     }
     public Enlace(String ip){
         this.ip=ip;
@@ -98,29 +99,50 @@ public class Enlace {
         }
         this.client= Receptor;
     }
-    public void setEscritura(){
-        try {
-            this.Escritura = new OutputStreamWriter(this.client.getOutputStream());
-        }
-        catch (Exception e){}
-    }
     public void EnviarMensaje(String Mensaje){
         try {
-            //this.ConectarEnviarFijo();
-
-            Escritura.write(Mensaje + "\n");
+            OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
+            Escritura.write(Integer.toString(this.port)+"~"+Mensaje + "\n");
             Escritura.flush();
-           //this.client.close();
+            this.client.close();
         }
         catch(IOException excep){
-            System.out.println(excep.getMessage());
+            System.out.print(excep.getMessage());
         }
     }
+    public void EnviarMensaje1(){
+
+        while(this.Enviando) {
+            if(this.MensajePendiente) {
+
+                try {
+                    //this.ConectarEnviarFijo();
+                    OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
+                    Escritura.write(this.MensajeaEnviar + "\n");
+                    Escritura.flush();
+                    //this.client.close();
+                } catch (IOException excep) {
+                    System.out.println(excep.getMessage());
+                }
+                this.MensajePendiente=false;
+            }
+        }
+    }
+    public void setEnviando(boolean valor){
+        this.Enviando=valor;
+    }
+    public void setMensajeaEnviar(String Mensaje){
+        this.MensajeaEnviar=Mensaje;
+    }
+    public void setMensajePendiente(boolean valor){
+        this.MensajePendiente=valor;
+    }
+
     public int getPort(){
         return this.port;
     }
     public static int PuertoDisponible(int PuertoOcupado){
-         int port=40000;
+        int port=40000;
         Socket Receptor=null;
         boolean flag=true;
         while(port<40100 && flag) {
@@ -138,14 +160,6 @@ public class Enlace {
         }
         Receptor=null;
         return port;
-    }
-    public void close(){
-        try {
-            this.client.close();
-        }
-        catch (Exception e){
-
-        }
     }
 
 }

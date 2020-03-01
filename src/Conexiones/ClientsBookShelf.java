@@ -1,5 +1,6 @@
 package Conexiones;
 
+import Hilos.HiloCliente;
 import jdk.net.Sockets;
 
 import java.net.Socket;
@@ -12,6 +13,10 @@ public class ClientsBookShelf {
     public static void add(Enlace enlace){
         ListaSockets.add(enlace);
         ListaPuertos.add(enlace.getPort());
+        enlace.setMensajePendiente(false);
+        HiloCliente hilo =new HiloCliente(enlace);
+        hilo.start();
+
 
        // enlace.close();
 
@@ -20,9 +25,17 @@ public class ClientsBookShelf {
         return ListaSockets.get(posicion);
     }
     public static void Enviar(int posicion,String Mensaje){
+
         //ListaSockets.get(posicion).ConectarEnviarFijo();
-        ListaSockets.get(posicion).EnviarMensaje(Mensaje);
+        //ListaSockets.get(posicion).EnviarMensaje(Mensaje);
        // ListaSockets.get(posicion).close();
+        if((Mensaje.split("~")[1]).equalsIgnoreCase("Eso es todo")){
+            ListaSockets.get(posicion).setEnviando(false);
+        }
+        else {
+            ListaSockets.get(posicion).setMensajeaEnviar(Mensaje);
+            ListaSockets.get(posicion).setMensajePendiente(true);
+        }
 
     }
     public static int getPortNumber(int position){

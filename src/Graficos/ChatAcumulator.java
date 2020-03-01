@@ -29,7 +29,7 @@ public class ChatAcumulator {
             try {
                 Enlace enlace = new Enlace();
                 enlace.ConectarEnviarVariable(40000, selfport);
-                enlace.setEscritura();
+                //enlace.setEscritura();
                 int puerto = enlace.getPort();
                 ClientsBookShelf.add(enlace);
                 AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
@@ -51,7 +51,7 @@ public class ChatAcumulator {
         if(ChatAcumulator.NumChats<=7) {
             Enlace enlace=new Enlace(Puerto);
             enlace.ConectarEnviarFijo();
-            enlace.setEscritura();
+            //enlace.setEscritura();
             int puerto=enlace.getPort();
             ClientsBookShelf.add(enlace);
             AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
