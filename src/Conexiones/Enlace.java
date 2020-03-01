@@ -1,6 +1,7 @@
 package Conexiones;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
@@ -9,6 +10,7 @@ public class Enlace {
     private  String ip;
     private Socket client;
     private boolean ConectadoS=false;
+    private OutputStreamWriter Escritura;
     public Enlace(int port, String ip){
         this.port=port;
         this.ip=ip;
@@ -96,13 +98,19 @@ public class Enlace {
         }
         this.client= Receptor;
     }
+    public void setEscritura(){
+        try {
+            this.Escritura = new OutputStreamWriter(this.client.getOutputStream());
+        }
+        catch (Exception e){}
+    }
     public void EnviarMensaje(String Mensaje){
         try {
             //this.ConectarEnviarFijo();
-            OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
+
             Escritura.write(Mensaje + "\n");
             Escritura.flush();
-           this.client.close();
+           //this.client.close();
         }
         catch(IOException excep){
             System.out.println(excep.getMessage());

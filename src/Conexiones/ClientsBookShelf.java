@@ -1,13 +1,18 @@
 package Conexiones;
 
+import jdk.net.Sockets;
+
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientsBookShelf {
     private static ArrayList<Enlace> ListaSockets=new ArrayList<Enlace>();
     private static ArrayList<Integer> ListaPuertos=new ArrayList<Integer>();
+    private static ArrayList<Socket> SocketShelf=new ArrayList<Socket>();
     public static void add(Enlace enlace){
         ListaSockets.add(enlace);
         ListaPuertos.add(enlace.getPort());
+
        // enlace.close();
 
     }

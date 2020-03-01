@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 
+import java.net.ServerSocket;
 import java.util.ArrayList;
 
 public class ChatAcumulator {
@@ -28,6 +29,7 @@ public class ChatAcumulator {
             try {
                 Enlace enlace = new Enlace();
                 enlace.ConectarEnviarVariable(40000, selfport);
+                enlace.setEscritura();
                 int puerto = enlace.getPort();
                 ClientsBookShelf.add(enlace);
                 AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
@@ -49,6 +51,7 @@ public class ChatAcumulator {
         if(ChatAcumulator.NumChats<=7) {
             Enlace enlace=new Enlace(Puerto);
             enlace.ConectarEnviarFijo();
+            enlace.setEscritura();
             int puerto=enlace.getPort();
             ClientsBookShelf.add(enlace);
             AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
