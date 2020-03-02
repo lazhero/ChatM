@@ -1,7 +1,12 @@
 package Graficos;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 
 public class LayoutCreation {
     public static AnchorPane Anchor(double width,double heigth){
@@ -15,6 +20,7 @@ public class LayoutCreation {
         AnchorPaneID AnchorP =new AnchorPaneID();
         AnchorP.setPrefHeight(heigth);
         AnchorP.setPrefWidth(width);
+        //AnchorP.setBackground(new Background(new BackgroundFill(, CornerRadii.EMPTY, Insets.EMPTY)));
         return AnchorP;
 
     }

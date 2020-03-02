@@ -1,8 +1,6 @@
 package Graficos;
 
-import Conexiones.Enlace;
 import Conexiones.EnlaceServidores;
-import Hilos.HiloServer;
 import Hilos.HiloServer2;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
-public class VentanaPrincipal extends Application {
+public class VentanaPrincipal3 extends Application {
 
 
     public static void main(String[] args) {
@@ -37,7 +35,6 @@ public class VentanaPrincipal extends Application {
        final ScrollPane SecondLevelScrollPane= LayoutCreation.scroll(400.0,500.0);
        Button btn= WidgetCreation.CreateButton("+");
        Button btn1= WidgetCreation.CreateButton("Y");
-       btn1.setDisable(true);
        boolean confirmacion=false;
         TextField TextInput=new TextField();
         TextInput.setPrefWidth(385.0);
@@ -45,12 +42,10 @@ public class VentanaPrincipal extends Application {
         TextInput.setText("Escriba su mensaje aqui ");
         ChatAcumulator.setChatAcumulator(SecondLevelScrollPane,FirstLevelAnchorPanel,mitelefono);
         btn.setOnAction(e->
-        {ChatAcumulator.Creator();
-            btn1.setDisable(false);}
+            ChatAcumulator.Creator()
         );
        btn1.setOnAction(e->
-            {ChatAcumulator.AddMessage(TextInput.getText());
-                TextInput.clear();}
+               ChatAcumulator.AddMessage(TextInput.getText())
                );
        //AnchorPane ThridLevelAnchorPanel=LayoutCreation.Anchor(400.0,10000.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,SecondLevelScrollPane,20.0,0.0,0.0,350.0);
@@ -61,7 +56,6 @@ public class VentanaPrincipal extends Application {
        LayoutNewContent.Add(FirstLevelAnchorPanel,TextInput,0.0,20.0,65.0,0.0);
        Scene scene=new Scene(FirstLevelAnchorPanel,800,600.0, Color.BLACK);
        primaryStage.setScene(scene);
-       primaryStage.setResizable(false);
        primaryStage.show();
 
     }

@@ -2,15 +2,21 @@ package Graficos;
 
 import Conexiones.ClientsBookShelf;
 import Conexiones.Enlace;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 
 public class ChatAcumulator {
+    private static int PuertoInicio;
     private static int selfport;
     private static int ScreenChat;
     private static ScrollPane scroll;
@@ -22,13 +28,15 @@ public class ChatAcumulator {
             ChatAcumulator.scroll=scroll;
             ChatAcumulator.pane=anchor;
             selfport=puertoServer;
+            PuertoInicio=40000;
     }
     public static void Creator(){
         if(ChatAcumulator.NumChats<=7) {
             try {
                 Enlace enlace = new Enlace();
-                enlace.ConectarEnviarVariable(40000, selfport);
+                enlace.ConectarEnviarVariable(PuertoInicio, selfport);
                 int puerto = enlace.getPort();
+                PuertoInicio=puerto+1;
                 ClientsBookShelf.add(enlace);
                 AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
                 Chats.add(anchor);
@@ -38,6 +46,7 @@ public class ChatAcumulator {
                         ChatAcumulator.ChatToScroll(btn.getID())
                 );
                 LayoutNewContent.Add(pane, btn, 50.0 * (btn.getID() + 1), 0, 0, 25.0);
+                ChatToScroll(btn.getID());
                 NumChats++;
             }
             catch (Exception e){
@@ -49,7 +58,6 @@ public class ChatAcumulator {
         if(ChatAcumulator.NumChats<=7) {
             Enlace enlace=new Enlace(Puerto);
             enlace.ConectarEnviarFijo();
-
             int puerto=enlace.getPort();
             ClientsBookShelf.add(enlace);
             AnchorPaneID anchor = LayoutCreation.AnchorID(400, 100000.0);
@@ -60,6 +68,7 @@ public class ChatAcumulator {
                     ChatAcumulator.ChatToScroll(btn.getID())
             );
             LayoutNewContent.Add(pane, btn, 50.0 *( btn.getID()+1), 0, 0, 25.0);
+            ChatToScroll(btn.getID());
             NumChats++;
         }
     }
@@ -68,23 +77,28 @@ public class ChatAcumulator {
         ScreenChat=indice;
     }
     public static void AddMessage(String texto){
-        Label label=new Label(texto);
-        AnchorPaneID anchor=Chats.get(ScreenChat);
-        int posicion=anchor.getNumeroitems()+1;
-        anchor.RaiseItemNumbers();
-        String Mensaje=Integer.toString(selfport)+"~"+texto;
-        LayoutNewContent.Add(anchor,label,posicion*30,0,30.0,0);
-        ClientsBookShelf.Enviar(ScreenChat,Mensaje);
+        if(!texto.equalsIgnoreCase("")) {
+            Label label = new Label(texto);
+            label.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+            AnchorPaneID anchor = Chats.get(ScreenChat);
+            int posicion = anchor.getNumeroitems() + 1;
+            anchor.RaiseItemNumbers();
+            String Mensaje = Integer.toString(selfport) + "~" + texto;
+            LayoutNewContent.Add(anchor, label, posicion * 30, 0, 30.0, 0);
+            ClientsBookShelf.Enviar(ScreenChat, Mensaje);
+        }
 
     }
     public static void AddMessage(String texto,int Listpos){
-        String textopuerto=Integer.toString(selfport);
-        System.out.println("Llegue al out mensaje");
-        Label label=new Label(texto);
-        AnchorPaneID anchor=Chats.get(Listpos);
-        int posicion=anchor.getNumeroitems()+1;
-        anchor.RaiseItemNumbers();
-        LayoutNewContent.Add(anchor,label,posicion*30,0,0,30.0);
+        if(!texto.equalsIgnoreCase("")) {
+            String textopuerto = Integer.toString(selfport);
+            System.out.println("Llegue al out mensaje");
+            Label label = new Label(texto);
+            AnchorPaneID anchor = Chats.get(Listpos);
+            int posicion = anchor.getNumeroitems() + 1;
+            anchor.RaiseItemNumbers();
+            LayoutNewContent.Add(anchor, label, posicion * 30, 0, 0, 30.0);
+        }
 
 
     }
