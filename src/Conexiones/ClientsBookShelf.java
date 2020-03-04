@@ -68,5 +68,10 @@ public class ClientsBookShelf {
     public static int getlen(){
         return ListaPuertos.size();
     }
+    public static int getlastport(){
+        Object[] Array=ListaPuertos.toArray();
+        int i=Array.length-1;
+        return ListaPuertos.get(i);
+    }
 
 }

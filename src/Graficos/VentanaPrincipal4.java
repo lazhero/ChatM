@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
-public class VentanaPrincipal3 extends Application {
+public class VentanaPrincipal4 extends Application {
 
 
     public static void main(String[] args) {

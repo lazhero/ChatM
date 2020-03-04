@@ -45,8 +45,11 @@ public class VentanaPrincipal2 extends Application {
         btn1.setStyle("-fx-background-color: #ff0e00; ");
         btn1.setGraphic(ImagenBtnEnviar);
         btn1.setWrapText(true);
-       //btn1.setGraphic(ImagesImport.GetImagen("file:c://Tecnologico de Costa Rica//Tercer Semestre//Algoritmos y estructura//ChatM//Imagenes//Iconos.png",0,0,60.0,60.0));
-       boolean confirmacion=false;
+        Button btn2=new Button(Integer.toString(mitelefono));
+        ImageView imageID=ImagesImport.GetImagen("C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructura\\ChatM\\Imagenes\\Telefono.png",0,0,50,25);
+        btn2.setGraphic(imageID);
+        btn2.setWrapText(true);
+        boolean confirmacion=false;
         TextField TextInput=new TextField();
         TextInput.setPrefWidth(385.0);
         TextInput.setPrefHeight(30.0);
@@ -54,7 +57,8 @@ public class VentanaPrincipal2 extends Application {
         ChatAcumulator.setChatAcumulator(SecondLevelScrollPane,FirstLevelAnchorPanel,mitelefono);
         btn.setOnAction(e->
         {
-            ChatAcumulator.Creator(); }
+            ChatAcumulator.Creator();
+             }
         );
        btn1.setOnAction(e->
             {ChatAcumulator.AddMessage(TextInput.getText());
@@ -64,13 +68,16 @@ public class VentanaPrincipal2 extends Application {
        LayoutNewContent.Add(FirstLevelAnchorPanel,SecondLevelScrollPane,20.0,0.0,0.0,350.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,btn,0.0,10.0,0,20.0);
        LayoutNewContent.Add(FirstLevelAnchorPanel,btn1,0.0,15.0,18.0,0.0);
+       LayoutNewContent.Add(FirstLevelAnchorPanel,btn2,0,5,0,230);
        FirstLevelAnchorPanel.getChildren().add(rectSecondLevel);
        //FirstLevelAnchorPanel.getChildren().addAll(imagen);
 
        LayoutNewContent.Add(FirstLevelAnchorPanel,TextInput,0.0,20.0,65.0,0.0);
+        //Image icon=new Image("C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructura\\ChatM\\Imagenes\\Ventana.png");
        Scene scene=new Scene(FirstLevelAnchorPanel,800,600.0, Color.BLACK);
        primaryStage.setScene(scene);
        primaryStage.setResizable(false);
+
        primaryStage.show();
 
     }

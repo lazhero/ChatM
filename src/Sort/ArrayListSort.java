@@ -20,4 +20,16 @@ public class ArrayListSort {
         }
         return PositionReturn;
     }
+    public static int diferente(ArrayList<Integer> array){
+        int Comparando=array.get(0);
+        int len=array.size();
+        int i=0;
+        while(i<len){
+            if(array.get(i)==Comparando){
+                Comparando++;
+            }
+            i++;
+        }
+        return Comparando;
+    }
 }
