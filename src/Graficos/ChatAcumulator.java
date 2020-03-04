@@ -21,6 +21,9 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 public class ChatAcumulator {
+    /**
+     * This class works and changes the objets in screen
+     */
     private static int PuertoInicio;
     private static int selfport;
     private static int ScreenChat=-10;
@@ -30,12 +33,24 @@ public class ChatAcumulator {
     private static int NumChats= 0;//Guarda la cantidad de chats hasta el momento
     private static ArrayList<AnchorPaneID> Chats=new ArrayList<AnchorPaneID>();//Guarda los anchorpanel con cada chat
     private static ArrayList<Integer> ExitPorts=new ArrayList<Integer>();//Guarda los puertos de salida de cada chat
+
+    /**
+     *
+     * @param scroll sets the scroll where the messages will be show
+     * @param anchor Sets the Windows main container
+     * @param puertoServer Sets the windows port as reference
+     */
     public static void setChatAcumulator(ScrollPane scroll,AnchorPane anchor,int puertoServer) {
             ChatAcumulator.scroll=scroll;
             ChatAcumulator.pane=anchor;
             selfport=puertoServer;
             PuertoInicio=40000;
     }
+
+    /**
+     * Creates a new chat,
+     * this means a new button and a new Anchor panel to add to the ScrollPanel and then class AddtoScroll to get the chat into the screen
+     */
     public static void Creator(){
         if(ChatAcumulator.NumChats<=7) {
             try {
@@ -64,6 +79,11 @@ public class ChatAcumulator {
             }
         }
     }
+
+    /**
+     * This creates a chat associated with a port
+     * @param Puerto A int parameter
+     */
     public static void Creator(int Puerto){
         if(ChatAcumulator.NumChats<=7) {
             Enlace enlace=new Enlace(Puerto);
@@ -87,6 +107,11 @@ public class ChatAcumulator {
             NumChats++;
         }
     }
+
+    /**
+     * Gets the specified position in a AnchorPanel's arrayList , to the screen
+     * @param indice The Arrays position
+     */
     private static void ChatToScroll(int indice){
         try {
             scroll.setContent(Chats.get(indice));
@@ -96,6 +121,11 @@ public class ChatAcumulator {
             scroll.setContent(LayoutCreation.Anchor(400,10000));
         }
     }
+
+    /**
+     * Adds a Label(Chat) to the anchor panel showing in screen
+     * @param texto The label's text
+     */
     public static void AddMessage(String texto){
         if(!texto.equalsIgnoreCase("") && ScreenChat!=-10) {
             Label label = new Label(texto);
@@ -110,6 +140,12 @@ public class ChatAcumulator {
         }
 
     }
+
+    /**
+     * Add a message to an AnchorPanel in a specific position
+     * @param texto The label's text
+     * @param Listpos The position in the array
+     */
     public static void AddMessage(String texto,int Listpos){
         if(!texto.equalsIgnoreCase("")) {
             String textopuerto = Integer.toString(selfport);
@@ -125,9 +161,7 @@ public class ChatAcumulator {
 
 
     }
-    public static void setBtn(Button button){
-        btnx=button;
-    }
+
 
 }
 

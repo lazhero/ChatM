@@ -180,8 +180,6 @@ public class Enlace {
                 System.out.println("Entre al bloque de enviar");
 
                 try {
-                    //this.ConectarEnviarFijo();
-                    //OutputStreamWriter Escritura = new OutputStreamWriter(this.client.getOutputStream());
                     Escritura.write(this.MensajeaEnviar + "\n");
                     Escritura.flush();
                     //this.client.close();
