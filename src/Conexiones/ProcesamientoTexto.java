@@ -8,10 +8,17 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class ProcesamientoTexto extends Thread {
+    /*
+    it process a messages and if its correct, calls agregando.agregar method
+     */
     private Socket socket;
     public ProcesamientoTexto(Socket socket) {
         this.socket=socket;
     }
+
+    /**
+     * A thread that runs the verification
+     */
     public void run(){
         String[] retorno = null;
         boolean enviar = false;

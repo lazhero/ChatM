@@ -7,6 +7,15 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class LectorTexto {
+    /*
+    Se encarga de procesar un mensaje asignado por un ServerSocket a un Socket
+     */
+
+    /**
+     *
+     * @param Entrada Socket
+     * @return A string which will be the split of the obtained text.
+     */
     public static String[] Lectura(Socket Entrada){
         String[] retorno=null;
         try {

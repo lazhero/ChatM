@@ -3,7 +3,9 @@ package Conexiones;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-
+/*
+This class works with Socket class, creating methods that connect to a port, send messages, or return the socket's port
+ */
 public class Enlace {
     private  int port;
     private  String ip;
@@ -17,19 +19,33 @@ public class Enlace {
         this.port=port;
         this.ip=ip;
     }
+
     public Enlace(){
         this.port=40000;
         this.ip="127.0.0.1";
     }
+
+    /**
+     *
+     * @param ip A string playing the ip direction
+     */
     public Enlace(String ip){
         this.ip=ip;
         this.port=40000;
     }
+
+    /**
+     *
+     * @param port A int playing the port's number
+     */
     public Enlace(int port){
         this.port=port;
         this.ip="127.0.0.1";
     }
 
+    /**
+     * Try to connect to the setted port, else, calls the ConectarEnviarVariable method
+     */
     public void ConectarEnviarFijo(){
         try{
             Socket Receptor=new Socket(this.ip,this.port);
@@ -43,6 +59,10 @@ public class Enlace {
             this.ConectarEnviarVariable();
         }
     }
+
+    /**
+     * Trys to connect to a port starting with 40000
+     */
     public void ConectarEnviarVariable(){
         this.port=40000;
         Socket Receptor=null;
@@ -61,6 +81,11 @@ public class Enlace {
         }
         this.client= Receptor;
     }
+
+    /**
+     * Finds a available port and connects to it
+     * @param inicio The starting port to try
+     */
     public void ConectarEnviarVariable(int inicio){
         this.port=inicio;
         Socket Receptor=null;
@@ -79,6 +104,12 @@ public class Enlace {
         }
         this.client= Receptor;
     }
+
+    /**
+     * Finds a available port, trying a sequeces of them, starting from a one
+     * @param inicio The first port to try
+     * @param PuertoPropio
+     */
     public void ConectarEnviarVariable(int inicio,int PuertoPropio){
         this.port=inicio;
         Socket Receptor=null;
@@ -100,6 +131,11 @@ public class Enlace {
         }
         this.client= Receptor;
     }
+
+    /**
+     * Sends a messaje through the setted point
+     * @param Mensaje A string that will be the message to send
+     */
     public void EnviarMensaje(String Mensaje){
         if(this.client==null || this.client.isClosed()){
             try {
@@ -123,6 +159,10 @@ public class Enlace {
             System.out.print(excep.getMessage());
         }
     }
+
+    /**
+     * Sends a message without closing the client connection
+     */
     public void EnviarMensaje1(){
 
         while(this.Enviando) {
@@ -155,19 +195,44 @@ public class Enlace {
             }
         }
     }
+
+    /**
+     *
+     * @param valor Sets if the socket's working in the EnviarMensaje1 method should be working or not
+     */
     public void setEnviando(boolean valor){
         this.Enviando=valor;
     }
+
+    /**
+     *
+     * @param Mensaje Sets the message to send with the EnviarMensaje1 Method
+     */
     public void setMensajeaEnviar(String Mensaje){
         this.MensajeaEnviar=Mensaje;
     }
+
+    /**
+     * Sets if theres is any message to send with the EnviarMensaje1 Method
+     * @param valor
+     */
     public void setMensajePendiente(boolean valor){
         this.MensajePendiente=valor;
     }
 
+    /**
+     *
+     * @return the actual port
+     */
     public int getPort(){
         return this.port;
     }
+
+    /**
+     * Finds and available port and returns it
+     * @param PuertoOcupado get the port to avaid, this is the caller port
+     * @return An available port
+     */
     public static int PuertoDisponible(int PuertoOcupado){
         int port=40000;
         Socket Receptor=null;

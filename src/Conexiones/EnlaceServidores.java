@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EnlaceServidores {
+    /*
+    This class works with the ServerSocket class, it has methods to receive messages, connect to a port, etc
+     */
     private  int port;
     private  String ip;
     private boolean recibiendo=true;
@@ -19,18 +22,36 @@ public class EnlaceServidores {
         this.port=port;
         this.ip=ip;
     }
+
+    /**
+     * Sets a port=40000 and ip="127.0.0.1"
+     */
     public EnlaceServidores(){
         this.port=4000;
         this.ip="127.0.0.1";
     }
+
+    /**
+     * Sets a ip equal to the received one and port=4000
+     * @param ip
+     */
     public EnlaceServidores(String ip){
         this.ip=ip;
         this.port=4000;
     }
+
+    /**
+     * Sets a port equals to the received one and a ip ="127.0.0.1"
+     * @param port
+     */
     public EnlaceServidores(int port){
         this.port=port;
         this.ip="127.0.0.1";
     }
+
+    /**
+     * Trys to connect to the setted port,else calls the  ConectarRecepVariable method
+     */
     public void ConectarRecepFijo(){
         try{
             this.Server=new ServerSocket(this.port);
@@ -41,6 +62,10 @@ public class EnlaceServidores {
             this.ConectarRecepVariable();
         }
     }
+
+    /**
+     * Finds a available port and connects to it
+     */
     public void ConectarRecepVariable(){
         this.port=40000;
         this.Server=null;
@@ -59,6 +84,11 @@ public class EnlaceServidores {
         }
 
     }
+
+    /**
+     * Accepts a client's message
+     * @return A two units length String[],applying the split method to it with a setted separator
+     */
     public String[] RecibirMensaje(){
         String Texto="";
         String[] retorno=null;
@@ -84,15 +114,18 @@ public class EnlaceServidores {
 
     }
 
-
-    public String[] getTexto() {
-        return Texto;
-    }
-
+    /**
+     *
+     * @return int representing the actual port
+     */
     public int getPort(){
         return this.port;
     }
 
+    /**
+     *
+     * @return The ServerSocket object
+     */
     public ServerSocket getServer() {
         return Server;
     }
