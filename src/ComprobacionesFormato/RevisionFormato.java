@@ -1,5 +1,7 @@
 package ComprobacionesFormato;
 
+import java.security.KeyStore;
+
 public class RevisionFormato {
     public static boolean Format(String texto,String Subtexto){
       int apperance=texto.indexOf(Subtexto);
@@ -11,6 +13,7 @@ public class RevisionFormato {
       }
       else return false;
     }
+
 
 }
 

@@ -1,24 +1,30 @@
 package Graficos;
 
+import ComprobacionesFormato.RevisionFormato;
 import Conexiones.ClientsBookShelf;
 import Conexiones.Enlace;
+import Images.ImagesImport;
+import com.sun.prism.Image;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
 public class ChatAcumulator {
     private static int PuertoInicio;
     private static int selfport;
-    private static int ScreenChat;
+    private static int ScreenChat=-10;
+    private static Button btnx;
     private static ScrollPane scroll;
     private static AnchorPane pane;
     private static int NumChats= 0;//Guarda la cantidad de chats hasta el momento
@@ -42,6 +48,10 @@ public class ChatAcumulator {
                 Chats.add(anchor);
                 String NumeroChat = Integer.toString(puerto);
                 ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
+                btn.setFont(Font.font("Rockwell Extra Bold",15));
+                String path="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructura\\ChatM\\Imagenes\\Us"+Integer.toString(btn.getID())+".png";
+                ImageView imagen= ImagesImport.GetImagen(path,0,0,30,30);
+                btn.setGraphic(imagen);
                 btn.setOnAction(e ->
                         ChatAcumulator.ChatToScroll(btn.getID())
                 );
@@ -64,6 +74,11 @@ public class ChatAcumulator {
             Chats.add(anchor);
             String NumeroChat = Integer.toString(puerto);
             ButtonID btn = new ButtonID("Chat" + NumeroChat, NumChats);
+            btn.setWrapText(true);
+            btn.setFont(Font.font("Rockwell Extra Bold",15));
+            String path="C:\\Tecnologico de Costa Rica\\Tercer Semestre\\Algoritmos y estructura\\ChatM\\Imagenes\\Us"+Integer.toString(btn.getID())+".png";
+            ImageView imagen= ImagesImport.GetImagen(path,0,0,30,30);
+            btn.setGraphic(imagen);
             btn.setOnAction(e ->
                     ChatAcumulator.ChatToScroll(btn.getID())
             );
@@ -73,18 +88,24 @@ public class ChatAcumulator {
         }
     }
     private static void ChatToScroll(int indice){
-        scroll.setContent(Chats.get(indice));
-        ScreenChat=indice;
+        try {
+            scroll.setContent(Chats.get(indice));
+            ScreenChat = indice;
+        }
+        catch (Exception e){
+            scroll.setContent(LayoutCreation.Anchor(400,10000));
+        }
     }
     public static void AddMessage(String texto){
-        if(!texto.equalsIgnoreCase("")) {
+        if(!texto.equalsIgnoreCase("") && ScreenChat!=-10) {
             Label label = new Label(texto);
+            label.setFont(Font.font("Rockwell Extra Bold",20));
             label.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
             AnchorPaneID anchor = Chats.get(ScreenChat);
             int posicion = anchor.getNumeroitems() + 1;
             anchor.RaiseItemNumbers();
             String Mensaje = Integer.toString(selfport) + "~" + texto;
-            LayoutNewContent.Add(anchor, label, posicion * 30, 0, 30.0, 0);
+            LayoutNewContent.Add(anchor, label, posicion * 35, 0, 30.0, 0);
             ClientsBookShelf.Enviar(ScreenChat, Mensaje);
         }
 
@@ -94,13 +115,18 @@ public class ChatAcumulator {
             String textopuerto = Integer.toString(selfport);
             System.out.println("Llegue al out mensaje");
             Label label = new Label(texto);
+            label.setFont(Font.font("Rockwell Extra Bold",20));
+            label.setBackground(new Background(new BackgroundFill(Color.CYAN, CornerRadii.EMPTY, Insets.EMPTY)));
             AnchorPaneID anchor = Chats.get(Listpos);
             int posicion = anchor.getNumeroitems() + 1;
             anchor.RaiseItemNumbers();
-            LayoutNewContent.Add(anchor, label, posicion * 30, 0, 0, 30.0);
+            LayoutNewContent.Add(anchor, label, posicion * 35, 0, 0, 30.0);
         }
 
 
+    }
+    public static void setBtn(Button button){
+        btnx=button;
     }
 
 }
